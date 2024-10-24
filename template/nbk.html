@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>UPDATE</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="title">title</label>
+        <input type="text" name="title" value="{{user.title}}" required> <br> <br>
+        <label for="date">date</label>
+        <input type="date" name="date" value="{{user.date|date:'Y-m-d'}}" required> <br> <br>
+        <label for="isabn">isbn</label>
+        <input type="text" name="isbn" value="{{user.isbn}}" required> <br> <br>
+
+        <select name="id" >
+            {% for x in das %}
+            <option value="{{x.id}}">{{x.name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">update</button>
+
+        </form>
+    
+</body>
+</html>

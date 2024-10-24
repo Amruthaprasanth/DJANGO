@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Oraganizers details</h2>
+    <table border="2">
+        <tr>
+            <th>Name</th>
+            <th>Contact Email</th>
+            <th>Phone Number</th>
+            <th>Delete Organizer</th>
+            <th>Update Organizer</th>
+        </tr>
+        <tr>
+            {% for i in data %}
+            <td>{{i.name}}</td>
+            <td>{{i.contact_email}}</td>
+            <td>{{i.phone_number}}</td>
+            <td><a href="{% url 'delete' i.id %}">Delete</a></td>
+            <td><a href="{% url 'update' i.id %}">Update</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

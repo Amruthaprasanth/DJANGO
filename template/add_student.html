@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add New Student</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Input field for the Student's First Name -->
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" required> <br><br>
+        
+        <!-- Input field for the Student's Last Name -->
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" required> <br><br>
+        
+        <!-- Input field for the Student's Email -->
+        <label for="email">Email:</label>
+        <input type="email" name="email" required> <br><br>
+        
+        <!-- Input field for the Student's Phone Number -->
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" required> <br><br>
+        
+        <!-- Dropdown for selecting Course -->
+        <label for="course">Course:</label>
+        <select name="course" required>
+            <option value="" disabled selected>Select a Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+            {% endfor %}
+        </select> <br><br>
+        
+        <!-- Submit button -->
+        <button type="submit">Add Student</button>
+    </form>
+</body>
+</html>

@@ -80,3 +80,36 @@ class Event(models.Model):
     date=models.DateTimeField()
     location=models.CharField(max_length=255)
     organizer=models.ForeignKey(Organizer,on_delete=models.CASCADE)
+class Category(models.Model):
+    id=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=100)
+    description=models.TextField()
+    def str(self):
+        return self.name
+class Product_cate(models.Model):
+    id=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=200)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE)
+    price=models.IntegerField()
+    stock_quantity=models.IntegerField()
+    def str(self):
+        return self.namee    
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+class UserRegistration(models.Model):
+    username=models.CharField(max_length=100)
+    email=models.EmailField()
+    password=models.CharField(max_length=100)
+    confirm_password=models.CharField(max_length=100)
+class usermedia(models.Model):
+    name=models.CharField(max_length=100)
+    age=models.IntegerField()
+    image=models.ImageField(upload_to='image/')
+class Image(models.Model):
+    title=models.CharField(max_length=100)
+    image=models.ImageField()
+    uploaded_at=models.DateTimeField(auto_now_add=True)        

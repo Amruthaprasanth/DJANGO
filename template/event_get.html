@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Events details</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="search" placeholder="search">
+        <button type="submit">search</button>
+    </form>
+    <table border="2">
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Oraganizer</th>
+            <th>Delete Event</th>
+            <th>Update Event</th>
+        </tr>
+        <tr>
+            {% for i in data %}
+            <td>{{i.title}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.location}}</td>
+            <td>{{i.organizer}}</td>
+            <td><a href="{% url 'delete' i.id %}">Delete</a></td>
+            <td><a href="{% url 'update' i.id %}">Update</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

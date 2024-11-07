@@ -325,9 +325,13 @@ def organizer_update(request,id):
         return redirect('or')
     return render(request,"update_organizer.html",{'data':orgainzer})
 
-
+from django.db.models import Q
 def eventget(request):
     event=Event.objects.all()
+    if request.method == 'POST':
+        value=request.POST.get('search')
+        srch=Event.objects.filter(Q(title__icontains=value))
+        return render(request,"em_display_event.html",{'data':srch})
     return render(request,"event_get.html",{'data':event})
 
 def eventadd(request):
@@ -364,3 +368,106 @@ def event_update(request,id):
         event.save()
         return redirect('ev')
     return render(request,"update_event.html",{'data':event,'data2':organizer})
+def add_product_cate(request):
+    data=Category.objects.all()
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        price=request.POST.get('price')
+        quantity=request.POST.get('quantity')
+        obj=Product_cate()
+        obj.name=name
+        obj.price=price
+        obj.stock_quantity=quantity
+        obj.category=Category.objects.get(id=request.POST.get('categ'))
+        obj.save()
+        return redirect('display_product_cate')
+    return render(request,'c_add_product.html',{'dataa':data})
+def display_product_cate(request):
+    data=Product_cate.objects.all()
+    return render(request,'c_display_product.html',{'dataa':data})
+def update_product_cate(request,id):
+    data=Category.objects.all()
+    obj=Product_cate.objects.get(id=id)
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        price=request.POST.get('price')
+        quantity=request.POST.get('quantity')
+        obj.name=name
+        obj.price=price
+        obj.stock_quantity=quantity
+        obj.category=Category.objects.get(id=request.POST.get('categ'))
+        obj.save()
+        return redirect('display_product_cate')
+    return render(request,'c_update_product.html',{'dataa':data,'obj':obj})
+def delete_product_cate(request,id):
+    data=Product_cate.objects.get(id=id)
+    data.delete()
+    return redirect('display_product_cate')
+
+def display_products_in_stock(request):
+    products_in_stock = Product.objects.filter(stock_quantity__gt=3)
+    
+    return render(request, 'display_products.html', {'products': products_in_stock})
+def loading(request):
+    return render(request,'login.html')
+def post_get(request):
+    posts = Post.objects.all()
+    return render(request, "post_list.html", {'data': posts})
+
+def post_add(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+
+        post_obj = Post(title=title, content=content)
+        post_obj.save()
+        
+        return redirect('post_list')
+    return render(request, "post_add.html")
+from .forms import *
+def post_v(request):
+    if request.method == 'POST':
+        form=postform(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            form=postform()
+            return render(request,"posth.html",{'form':form})
+def add_userRegistration(request):
+    if request.method == 'POST':
+        form=UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form=UserRegistrationForm()
+    return render(request,'userss.html',{'form':form})        
+def media(request):
+    i=usermedia.objects.all()
+    return render(request,"media.html",{'image':i})
+def add_image(request):
+    if request.method == 'POST':
+        title=request.POST.get('title')
+        image=request.FILES.get('img')
+        obj=Image()
+        obj.title=title
+        obj.image=image
+        obj.save()
+        return redirect('ag')
+    return render(request,'image_form.html')
+def view_image(request):
+    data=Image.objects.all()
+    v=data.values()
+    print(v)
+    return render(request,'image_view.html',{'dataa':data})
+def base(request):
+    return render(request,"base.html")
+def home(request):
+    return render(request,"home.html")
+def about(request):
+    return render(request,"about.html")
+def products(request):
+    return render(request, "products.html")
+def base2(request):
+    return render(request,"base2.html")
+def home2(request):
+    return render(request,"home2.html")

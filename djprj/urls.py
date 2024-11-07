@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from hospital import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hh',views.fun1),
@@ -46,6 +48,27 @@ urlpatterns = [
     path('displaySpecificStudent/<int:id>',views.displaySpecificStudent,name='dss'),
     path('updateStudent/<int:id>',views.updateStudent,name='updateStudent'),
     path('deleteStudent/<int:id>',views.deleteStudent,name='deleteStudent'),
+    path('displayevent',views.eventget,name='ev'),
+    path('add_product_cate',views.add_product_cate),
+    path('display_product_cate',views.display_product_cate,name='display_product_cate'),
+    path('update_product_cate/<int:id>',views.update_product_cate,name='update_product_cate'),
+    path('delete_product_cate/<int:id>',views.delete_product_cate,name='delete_product_cate'),
+    path('display_products', views.display_products_in_stock, name='display_products_in_stock'),
+    path('l',views.loading),
+    path('display', views.post_get, name='post_list'),
+    path('add', views.post_add, name='post_add'),
+    path('addUser',views.add_userRegistration),
+    path('gh',views.media),
+    path('add_image',views.add_image),
+    path('view_image',views.view_image,name='ag'),
+    path("",views.base),
+    path("home",views.home),
+    path("about",views.about),
+    path("b",views.base2),
+    path('products', views.products, name='products'),
+    path("h",views.home2),
 
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

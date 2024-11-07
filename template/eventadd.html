@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Event Registration</h2>
+    <form method="POST">
+        {% csrf_token %}
+    <label for="title">Event Title</label>
+    <input type="text" name="title"required><br><br>
+
+    <label for="date">Date</label>
+    <input type="datetime-local" name="date"required><br><br>
+
+    <label for="location">Location</label>
+    <input type="text" name="location"required><br><br>
+
+    <label for="organizer">Oraganizer</label>
+    <select name="org">
+        {% for x in data %}
+        <option value="{{x.id}}">{{x.name}}</option>
+        {% endfor %}
+    </select><br><br>
+    <button type="submit">add</button>
+</body>
+</html>

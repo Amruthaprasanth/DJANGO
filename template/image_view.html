@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/imgcss.css' %}">
+</head>
+<body>
+    <h1>User Details</h1>
+    <table border="2">
+            <th>Title</th>
+            <th>Image</th>
+            <th>Uploaded at</th>
+            <tr>
+                {% for i in dataa %}
+
+                <td>{{i.title}}</td>
+                <td>
+                    {% if i.image %}
+                        <img src="{{ i.image.url }}" width="100" height="100">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </td>
+                <td>{{ i.uploaded_at }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Media List</title>
+</head>
+<body>
+    <h1>User Media List</h1>
+
+    <div>
+        <div>
+            <strong>Name</strong>
+        </div>
+        <div>
+            <strong>Age</strong>
+        </div>
+        <div>
+            <strong>Image</strong>
+        </div>
+    </div>
+
+    {% for user in image %}
+    <div>
+        <div>{{ user.name }}</div>
+        <div>{{ user.age }}</div>
+        <div>
+                <img src="{{ user.image.url }}" alt="User Image" width="100">
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>

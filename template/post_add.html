@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Registration</title>
+    <link rel="stylesheet" href="{% static 'css/post_add.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Post Registration</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="title">Post Title</label>
+            <input type="text" name="title" required><br><br>
+
+            <label for="content">Post Content</label>
+            <textarea name="content" required></textarea><br><br>
+
+            <button type="submit">Add Post</button>
+        </form>
+    </div>
+</body>
+</html>
